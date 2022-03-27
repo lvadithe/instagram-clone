@@ -5,3 +5,12 @@
 .app {
   background-color: #FAFAFA;
 }
+
+.app__headerImage {
+  max-width: 150px;
+}
+
+.app__signUp {
+  display: flex;
+  flex-direction: column;
+}
