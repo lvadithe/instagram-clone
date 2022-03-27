@@ -5,10 +5,3 @@
 .app {
   background-color: #FAFAFA;
 }
-
-.app__header {
-  background-color: rgb(255, 255, 255);
-  padding: 20px;
-  object-fit: contain;
-  border-bottom: 1px solid lightgray;
-}

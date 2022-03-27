@@ -1,38 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { db } from './FireBase/firebase';
-import Post from './components/Principal/Post/Post';
+import React, { useState } from 'react';
+import Posts from './components/Principal/Posts/Posts';
 import LOGO from "./assets/insta_logo.png";
+import { Input, Modal } from '@material-ui/core';
+import { Box } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import './App.css';
+import Nav from './components/Secondary/Nav/Nav';
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 function App() {
-  const [posts, setPosts] = useState([])
+  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    db.collection('posts').onSnapshot(snapshot => {
-      setPosts(snapshot.docs.map(doc => doc.data()))
-    })
-  }, [])
+  const signUp = (event) => {
 
-  console.log(posts)
+  }
+
   return (
     <div className="app">
-      <div className="app__header">
-        <img
-          className="app__headerImage"
-          src={LOGO}
-          alt=""
-        />
-      </div>
-      {
-        posts.length > 0 ? (
-          posts.map((id, post) => {
-            return <Post key={id} username={post.username} caption={post.caption} imageUrl={post.imageUrl} />
-          })
-        ) : (
-          <div>No posts</div>
-        )
-        
-      }
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box sx={style}>
+          <img
+            className="app__headerImage"
+            src={LOGO}
+            alt=""
+          />
+          <Input
+            type='text'
+            placeholder='username'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            type='text'
+            placeholder='email'
+            value={username}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <Input
+            type='text'
+            placeholder='password'
+            value={username}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Box>
+      </Modal>
+      <Nav />
+      <Button onClick={() => setOpen(true)}>Sign up</Button>
+      <Posts />
     </div>
   )
 }
